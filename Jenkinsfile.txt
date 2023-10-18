@@ -28,8 +28,8 @@ pipeline {
             // Publish the SonarQube results on the dashboard
             script {
                 def scannerHome = tool 'SonarScanner'
-                def serverUrl = 'http://your-sonarqube-server-url'  // Replace with your SonarQube server URL
-                def credentialsId = 'your-sonarqube-credentials-id'  // Replace with your SonarQube credentials
+                def serverUrl = 'http://localhost:9000/projects'  // Replace with your SonarQube server URL
+                def credentialsId = 'SAMPLE_DEVOPS'  // Replace with your SonarQube credentials
 
                 withSonarQubeEnv('SonarQubeServer') {
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=your-project-key -Dsonar.host.url=${serverUrl} -Dsonar.login=${credentialsId}"
