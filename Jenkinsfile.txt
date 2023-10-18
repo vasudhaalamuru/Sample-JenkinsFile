@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Checkout your source code from your version control system
                 // For example, if using Git:
-                git 'https://github.com/your/repo.git'
+                git 'https://github.com/vasudhaalamuru/Sample-JenkinsFile.git'
             }
         }
 
