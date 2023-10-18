@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your source code from your version control system
+                // For example, if using Git:
+                git 'https://github.com/your/repo.git'
+            }
+        }
+
+        stage('Build and Analyze') {
+            steps {
+                // Build your project, replace with the build commands for your project
+                sh 'mvn clean install'
+                
+                // Run SonarScanner
+                withSonarQubeEnv('SonarQubeServer') {
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            // Publish the SonarQube results on the dashboard
+            script {
+                def scannerHome = tool 'SonarScanner'
+                def serverUrl = 'http://your-sonarqube-server-url'  // Replace with your SonarQube server URL
+                def credentialsId = 'your-sonarqube-credentials-id'  // Replace with your SonarQube credentials
+
+                withSonarQubeEnv('SonarQubeServer') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=your-project-key -Dsonar.host.url=${serverUrl} -Dsonar.login=${credentialsId}"
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
