@@ -30,7 +30,7 @@ pipeline {
                 def scannerHome = tool 'SonarScanner'
                 def serverUrl = 'http://localhost:9000/projects'  // Replace with your SonarQube server URL
                 def credentialsId = 'SAMPLE_DEVOPS'  // Replace with your SonarQube credentials
-
+                def softtokenId = 'sqa_dcf1c92fa228bdb2fe4ae4248ca4bfee2f77fd2a '
                 withSonarQubeEnv('SonarQubeServer') {
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=your-project-key -Dsonar.host.url=${serverUrl} -Dsonar.login=${credentialsId}"
                 }
